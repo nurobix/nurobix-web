@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurobix — Building the future of software with AI</title>
+    <meta name="description" content="Nurobix is an indie software studio pushing the boundaries of AI-assisted development. Discover our apps and follow the journey.">
+    <link rel="icon" type="image/png" href="logo-icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #050510;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050510; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px -15px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Background effects */
+        .bg-grid {
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #818cf8 0%, #6366f1 25%, #a78bfa 50%, #818cf8 75%, #6366f1 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Button glow */
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(12px);
+        }
+        .btn-primary:hover::before { opacity: 0.6; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px -8px rgba(99, 102, 241, 0.5); }
+
+        .btn-secondary {
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(99, 102, 241, 0.6);
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(5, 5, 16, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(99, 102, 241, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Badge */
+        .badge-glow {
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+        }
+
+        /* Featured card border animation */
+        .featured-card {
+            position: relative;
+        }
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #6366f1, #a78bfa, #6366f1);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.5;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+        }
+
+        /* Language switcher */
+        .lang-btn {
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active {
+            color: #818cf8;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Store buttons */
+        .store-btn {
+            transition: all 0.3s ease;
+        }
+        .store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+<!-- ============================================ -->
+<!-- NAVBAR                                       -->
+<!-- ============================================ -->
+<nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2.5 group">
+            <img src="logo-icon.png" alt="" class="h-8 w-auto opacity-90 group-hover:opacity-100 transition-opacity">
+            <span class="text-xl font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">
+                Nurobix
+            </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#projects" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
+            <a href="#method" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.method">Method</a>
+            <a href="#content" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.content">Content</a>
+            <a href="#contact" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a>
+            <!-- Language switcher -->
+            <div class="flex items-center gap-1 ml-2 rounded-full glass px-1 py-1">
+                <button onclick="setLang('en')" class="lang-btn text-xs px-2 py-1 rounded-full" data-lang="en">EN</button>
+                <button onclick="setLang('fr')" class="lang-btn text-xs px-2 py-1 rounded-full" data-lang="fr">FR</button>
+                <button onclick="setLang('es')" class="lang-btn text-xs px-2 py-1 rounded-full" data-lang="es">ES</button>
+            </div>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 bg-[#050510]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
+    <a href="#projects" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
+    <a href="#method" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.method">Method</a>
+    <a href="#content" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.content">Content</a>
+    <a href="#contact" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a>
+    <div class="flex items-center gap-2 mt-4">
+        <button onclick="setLang('en'); closeMobileMenu();" class="lang-btn text-sm px-3 py-2 rounded-full glass" data-lang="en">EN</button>
+        <button onclick="setLang('fr'); closeMobileMenu();" class="lang-btn text-sm px-3 py-2 rounded-full glass" data-lang="fr">FR</button>
+        <button onclick="setLang('es'); closeMobileMenu();" class="lang-btn text-sm px-3 py-2 rounded-full glass" data-lang="es">ES</button>
+    </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- HERO                                         -->
+<!-- ============================================ -->
+<section class="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
+    <!-- Background glows -->
+    <div class="hero-glow bg-brand-600 top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="hero-glow bg-purple-600 bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2" style="opacity: 0.1;"></div>
+
+    <!-- Particles container -->
+    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8 badge-glow fade-up">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="text-xs font-medium text-gray-300" data-i18n="hero.badge">Indie Software Studio</span>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-6 fade-up">
+            <span data-i18n="hero.title1">Building the future</span><br>
+            <span data-i18n="hero.title2">of software </span><span class="gradient-text" data-i18n="hero.title3">with AI.</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed fade-up" data-i18n="hero.subtitle">
+            Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps, I ship (very) fast, and I share the entire behind-the-scenes process with you.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up">
+            <a href="#projects" class="btn-primary text-white font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
+                <span data-i18n="hero.cta1">See my projects</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@nurobix" target="_blank" rel="noopener" class="btn-secondary text-gray-300 font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#050510" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span data-i18n="hero.cta2">Follow the journey</span>
+            </a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- PROJECTS                                     -->
+<!-- ============================================ -->
+<section id="projects" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section header -->
+        <div class="text-center mb-16 fade-up">
+            <span class="text-xs font-mono text-brand-400 tracking-widest uppercase mb-3 block" data-i18n="projects.label">Portfolio</span>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="projects.title">Projects</h2>
+            <p class="text-gray-400 max-w-lg mx-auto" data-i18n="projects.subtitle">Apps I build from scratch using AI-first methodologies.</p>
+        </div>
+
+        <!-- Featured project: Mogogo -->
+        <div class="featured-card glass-card rounded-2xl p-8 md:p-10 mb-8 fade-up">
+            <div class="flex flex-col md:flex-row md:items-center gap-8">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center text-2xl">
+                            🔥
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Mogogo</h3>
+                            <span class="text-xs text-brand-400 font-mono" data-i18n="projects.mogogo.tag">Featured Project</span>
+                        </div>
+                        <span class="ml-auto hidden sm:inline-flex items-center gap-1 text-xs font-medium text-green-400 bg-green-400/10 px-3 py-1 rounded-full">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                            Live
+                        </span>
+                    </div>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3" data-i18n="projects.mogogo.name">Sorties & Activit&eacute;s</h4>
+                    <p class="text-gray-400 leading-relaxed mb-6" data-i18n="projects.mogogo.desc">
+                        An AI-powered oracle to find your next local activity. Tell it your mood, your vibe, and let it surprise you with the perfect plan.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-xs font-mono px-3 py-1 rounded-full glass text-gray-300">AI-Powered</span>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full glass text-gray-300">Mobile App</span>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full glass text-gray-300">Geolocation</span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <!-- App Store -->
+                        <a href="#" class="store-btn inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 hover:bg-white/10">
+                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            <div class="text-left">
+                                <span class="text-[10px] text-gray-400 block leading-none" data-i18n="projects.store.soon">Coming soon</span>
+                                <span class="text-sm font-semibold text-white leading-tight">App Store</span>
+                            </div>
+                        </a>
+                        <!-- Google Play -->
+                        <a href="#" class="store-btn inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 hover:bg-white/10">
+                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.17 12l2.528-2.492zM5.864 2.658L16.8 9.49l-2.302 2.302-8.634-8.634z"/></svg>
+                            <div class="text-left">
+                                <span class="text-[10px] text-gray-400 block leading-none" data-i18n="projects.store.soon">Coming soon</span>
+                                <span class="text-sm font-semibold text-white leading-tight">Google Play</span>
+                            </div>
+                        </a>
+                        <!-- Website -->
+                        <a href="https://mogogo.app" target="_blank" rel="noopener" class="store-btn inline-flex items-center gap-2 bg-brand-600/20 border border-brand-500/30 rounded-xl px-4 py-2.5 hover:bg-brand-600/30 text-brand-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                            <span class="text-sm font-semibold">mogogo.app</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Mockup illustration -->
+                <div class="flex-shrink-0 w-full md:w-64 h-64 md:h-80 rounded-2xl bg-gradient-to-br from-orange-500/20 via-rose-500/10 to-purple-500/20 border border-white/5 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-6xl mb-3">🗺️</div>
+                        <span class="text-sm text-gray-500 font-mono" data-i18n="projects.mogogo.mockup">App preview</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other projects grid -->
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Placeholder project 1 -->
+            <div class="glass-card rounded-2xl p-6 fade-up">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-lg">🧠</div>
+                    <div>
+                        <h3 class="font-bold text-white" data-i18n="projects.next1.name">Next Project</h3>
+                        <span class="text-xs text-gray-500 font-mono" data-i18n="projects.next1.status">In development</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="projects.next1.desc">Something new is cooking. Stay tuned for my next AI-powered app.</p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">AI</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">SaaS</span>
+                </div>
+            </div>
+
+            <!-- Placeholder project 2 -->
+            <div class="glass-card rounded-2xl p-6 fade-up">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-lg">⚡</div>
+                    <div>
+                        <h3 class="font-bold text-white" data-i18n="projects.next2.name">Coming Soon</h3>
+                        <span class="text-xs text-gray-500 font-mono" data-i18n="projects.next2.status">Ideation phase</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="projects.next2.desc">More ideas are brewing. Each project pushes the boundaries of what I can build with AI.</p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Mobile</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Productivity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+
+<!-- ============================================ -->
+<!-- METHOD                                       -->
+<!-- ============================================ -->
+<section id="method" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <!-- Text -->
+            <div class="fade-up">
+                <span class="text-xs font-mono text-brand-400 tracking-widest uppercase mb-3 block" data-i18n="method.label">Methodology</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6" data-i18n="method.title">AI is my co-pilot.</h2>
+                <p class="text-gray-400 leading-relaxed mb-6" data-i18n="method.p1">
+                    I don't just use AI to write code. I use it to think, design, prototype, and ship. From the first wireframe to production, AI is embedded in every step of my workflow.
+                </p>
+                <p class="text-gray-400 leading-relaxed mb-8" data-i18n="method.p2">
+                    The result? Solo-built apps that punch above their weight. Faster iterations, bolder ideas, and a transparent process shared with the world.
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold gradient-text">10x</div>
+                        <div class="text-xs text-gray-500 mt-1" data-i18n="method.stat1">Faster prototyping</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold gradient-text">1</div>
+                        <div class="text-xs text-gray-500 mt-1" data-i18n="method.stat2">Solo developer</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold gradient-text">∞</div>
+                        <div class="text-xs text-gray-500 mt-1" data-i18n="method.stat3">Possibilities</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual -->
+            <div class="fade-up">
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <!-- Step 1 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600/20 flex items-center justify-center text-brand-400 font-bold text-sm flex-shrink-0 mt-0.5">1</div>
+                        <div>
+                            <h4 class="font-semibold text-white text-sm" data-i18n="method.step1.title">Ideate with AI</h4>
+                            <p class="text-xs text-gray-500" data-i18n="method.step1.desc">Brainstorm concepts, validate ideas, and outline features using conversational AI.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600/20 flex items-center justify-center text-brand-400 font-bold text-sm flex-shrink-0 mt-0.5">2</div>
+                        <div>
+                            <h4 class="font-semibold text-white text-sm" data-i18n="method.step2.title">Design & Prototype</h4>
+                            <p class="text-xs text-gray-500" data-i18n="method.step2.desc">Generate UI mockups, iterate on designs, and build interactive prototypes at lightning speed.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600/20 flex items-center justify-center text-brand-400 font-bold text-sm flex-shrink-0 mt-0.5">3</div>
+                        <div>
+                            <h4 class="font-semibold text-white text-sm" data-i18n="method.step3.title">Build & Ship</h4>
+                            <p class="text-xs text-gray-500" data-i18n="method.step3.desc">Write production code with AI assistance, test rigorously, and deploy to the world.</p>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600/20 flex items-center justify-center text-brand-400 font-bold text-sm flex-shrink-0 mt-0.5">4</div>
+                        <div>
+                            <h4 class="font-semibold text-white text-sm" data-i18n="method.step4.title">Share Everything</h4>
+                            <p class="text-xs text-gray-500" data-i18n="method.step4.desc">Document the journey publicly. Every win, every challenge, every lesson learned.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+
+<!-- ============================================ -->
+<!-- CONTENT / BUILD IN PUBLIC                    -->
+<!-- ============================================ -->
+<section id="content" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section header -->
+        <div class="text-center mb-16 fade-up">
+            <span class="text-xs font-mono text-brand-400 tracking-widest uppercase mb-3 block" data-i18n="content.label">Build in Public</span>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="content.title">The whole process, documented.</h2>
+            <p class="text-gray-400 max-w-lg mx-auto" data-i18n="content.subtitle">I document everything. Watch how I build apps from scratch using AI — no shortcuts, no secrets.</p>
+        </div>
+
+        <!-- Content grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <!-- Card 1: YouTube Long -->
+            <div class="glass-card rounded-2xl p-6 fade-up group">
+                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-red-500/20 to-red-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-red-500/30 transition-all">
+                    <svg class="w-12 h-12 text-red-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </div>
+                <h3 class="font-bold text-white mb-2" data-i18n="content.card1.title">Full Build Videos</h3>
+                <p class="text-sm text-gray-400" data-i18n="content.card1.desc">Deep-dive videos where I code entire apps live with AI. From zero to deployment.</p>
+            </div>
+
+            <!-- Card 2: Shorts -->
+            <div class="glass-card rounded-2xl p-6 fade-up group">
+                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-purple-500/30 transition-all">
+                    <svg class="w-12 h-12 text-purple-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="font-bold text-white mb-2" data-i18n="content.card2.title">Shorts & Reels</h3>
+                <p class="text-sm text-gray-400" data-i18n="content.card2.desc">Quick tips, AI tricks, and behind-the-scenes moments in 60 seconds or less.</p>
+            </div>
+
+            <!-- Card 3: Community -->
+            <div class="glass-card rounded-2xl p-6 fade-up group">
+                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-blue-500/30 transition-all">
+                    <svg class="w-12 h-12 text-blue-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <h3 class="font-bold text-white mb-2" data-i18n="content.card3.title">Community</h3>
+                <p class="text-sm text-gray-400" data-i18n="content.card3.desc">Join a growing community of indie devs and AI enthusiasts building the future together.</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center fade-up">
+            <a href="https://www.youtube.com/@nurobix" target="_blank" rel="noopener" class="btn-primary text-white font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#050510" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span data-i18n="content.cta">Subscribe on YouTube</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+
+<!-- ============================================ -->
+<!-- FOOTER / CONTACT                             -->
+<!-- ============================================ -->
+<footer id="contact" class="relative py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="glass-card rounded-2xl p-8 md:p-12 text-center mb-12 fade-up">
+            <h2 class="text-2xl md:text-4xl font-bold mb-4" data-i18n="contact.title">Let's connect.</h2>
+            <p class="text-gray-400 max-w-md mx-auto mb-8" data-i18n="contact.subtitle">Got a question, a collab idea, or just want to say hi? Reach out anytime.</p>
+            <a id="email-link" href="#" class="btn-primary text-white font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span data-i18n="contact.email">Send me an email</span>
+            </a>
+        </div>
+
+        <!-- Social links & bottom -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Logo -->
+            <div class="flex items-center gap-2.5">
+                <img src="logo-icon.png" alt="" class="h-8 w-auto opacity-70">
+                <span class="text-lg font-bold text-white">Nurobix</span>
+            </div>
+
+            <!-- Social icons -->
+            <div class="flex items-center gap-4">
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@nurobix" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-red-400 hover:border-red-400/30 transition-all" aria-label="YouTube">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#050510" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@nurobix" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all" aria-label="TikTok">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.28 8.28 0 0 0 4.76 1.5V6.74a4.79 4.79 0 0 1-1-.05z"/></svg>
+                </a>
+                <!-- X / Twitter -->
+                <a href="https://x.com/nurobix" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all" aria-label="X">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/nurobix.io/" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-pink-400 hover:border-pink-400/30 transition-all" aria-label="Instagram">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-xs text-gray-500">
+                &copy; 2026 Nurobix. <span data-i18n="footer.rights">All rights reserved.</span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT                                   -->
+<!-- ============================================ -->
+<script>
+// ---- i18n translations ----
+const translations = {
+    en: {
+        'nav.projects': 'Projects',
+        'nav.method': 'Method',
+        'nav.content': 'Content',
+        'nav.contact': 'Contact',
+        'hero.badge': 'Indie Software Studio',
+        'hero.title1': 'Building the future',
+        'hero.title2': 'of software ',
+        'hero.title3': 'with AI.',
+        'hero.subtitle': 'Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps, I ship (very) fast, and I share the entire behind-the-scenes process with you.',
+        'hero.cta1': 'See my projects',
+        'hero.cta2': 'Follow the journey',
+        'projects.label': 'Portfolio',
+        'projects.title': 'Projects',
+        'projects.subtitle': 'Apps I build from scratch using AI-first methodologies.',
+        'projects.mogogo.tag': 'Featured Project',
+        'projects.mogogo.name': 'Outings & Activities',
+        'projects.mogogo.desc': 'An AI-powered oracle to find your next local activity. Tell it your mood, your vibe, and let it surprise you with the perfect plan.',
+        'projects.mogogo.mockup': 'App preview',
+        'projects.store.soon': 'Coming soon',
+        'projects.next1.name': 'Next Project',
+        'projects.next1.status': 'In development',
+        'projects.next1.desc': 'Something new is cooking. Stay tuned for my next AI-powered app.',
+        'projects.next2.name': 'Coming Soon',
+        'projects.next2.status': 'Ideation phase',
+        'projects.next2.desc': 'More ideas are brewing. Each project pushes the boundaries of what I can build with AI.',
+        'method.label': 'Methodology',
+        'method.title': 'AI is my co-pilot.',
+        'method.p1': "I don't just use AI to write code. I use it to think, design, prototype, and ship. From the first wireframe to production, AI is embedded in every step of my workflow.",
+        'method.p2': 'The result? I code the ideas, AI does the heavy lifting. Together, we ship faster, iterate bolder, and share the entire process with the world.',
+        'method.stat1': 'Faster prototyping',
+        'method.stat2': 'Solo developer',
+        'method.stat3': 'Possibilities',
+        'method.step1.title': 'Ideate with AI',
+        'method.step1.desc': 'Brainstorm concepts, validate ideas, and outline features using conversational AI.',
+        'method.step2.title': 'Design & Prototype',
+        'method.step2.desc': 'Generate UI mockups, iterate on designs, and build interactive prototypes at lightning speed.',
+        'method.step3.title': 'Build & Ship',
+        'method.step3.desc': 'Write production code with AI assistance, test rigorously, and deploy to the world.',
+        'method.step4.title': 'Share Everything',
+        'method.step4.desc': 'Document the journey publicly. Every win, every challenge, every lesson learned.',
+        'content.label': 'Build in Public',
+        'content.title': 'The whole process, documented.',
+        'content.subtitle': 'I document everything. Watch how I build apps from scratch using AI — no shortcuts, no secrets.',
+        'content.card1.title': 'Full Build Videos',
+        'content.card1.desc': 'Deep-dive videos where I code entire apps live with AI. From zero to deployment.',
+        'content.card2.title': 'Shorts & Reels',
+        'content.card2.desc': 'Quick tips, AI tricks, and behind-the-scenes moments in 60 seconds or less.',
+        'content.card3.title': 'Community',
+        'content.card3.desc': 'Join a growing community of indie devs and AI enthusiasts. Together, we build the future.',
+        'content.cta': 'Subscribe on YouTube',
+        'contact.title': "Let's connect.",
+        'contact.subtitle': 'Got a question, a collab idea, or just want to say hi? Reach out anytime.',
+        'contact.email': 'Send me an email',
+        'footer.rights': 'All rights reserved.',
+    },
+    fr: {
+        'nav.projects': 'Projets',
+        'nav.method': 'M\u00e9thode',
+        'nav.content': 'Contenu',
+        'nav.contact': 'Contact',
+        'hero.badge': 'Studio Logiciel Indie',
+        'hero.title1': "Construire le futur",
+        'hero.title2': 'du logiciel ',
+        'hero.title3': 'avec l\u2019IA.',
+        'hero.subtitle': "Nurobix est mon studio de d\u00e9veloppement solo. Apr\u00e8s 20 ans dans la tech, je repousse aujourd\u2019hui les limites du code assist\u00e9 par l\u2019IA. Je cr\u00e9e des apps, je livre (tr\u00e8s) vite, et je partage avec vous toutes les coulisses du processus.",
+        'hero.cta1': 'Voir mes projets',
+        'hero.cta2': "Suivre l\u2019aventure",
+        'projects.label': 'Portfolio',
+        'projects.title': 'Projets',
+        'projects.subtitle': "Des apps que je cr\u00e9e de z\u00e9ro avec une approche IA-first.",
+        'projects.mogogo.tag': 'Projet phare',
+        'projects.mogogo.name': 'Sorties & Activit\u00e9s',
+        'projects.mogogo.desc': "Un oracle propuls\u00e9 par l\u2019IA pour trouver votre prochaine activit\u00e9 locale. Dites-lui votre humeur, votre vibe, et laissez-le vous surprendre avec le plan parfait.",
+        'projects.mogogo.mockup': "Aper\u00e7u de l\u2019app",
+        'projects.store.soon': 'Bient\u00f4t disponible',
+        'projects.next1.name': 'Prochain projet',
+        'projects.next1.status': 'En d\u00e9veloppement',
+        'projects.next1.desc': "Quelque chose mijote. Restez \u00e0 l\u2019\u00e9coute pour ma prochaine app IA.",
+        'projects.next2.name': 'Bient\u00f4t',
+        'projects.next2.status': 'Phase d\u2019id\u00e9ation',
+        'projects.next2.desc': "D\u2019autres id\u00e9es germent. Chaque projet repousse les limites de ce que je peux construire avec l\u2019IA.",
+        'method.label': 'M\u00e9thodologie',
+        'method.title': "L\u2019IA est mon copilote.",
+        'method.p1': "Je n\u2019utilise pas juste l\u2019IA pour \u00e9crire du code. Je l\u2019utilise pour r\u00e9fl\u00e9chir, designer, prototyper et livrer. Du premier wireframe \u00e0 la prod, l\u2019IA est int\u00e9gr\u00e9e \u00e0 chaque \u00e9tape de mon workflow.",
+        'method.p2': "Le r\u00e9sultat\u00a0? Je code les id\u00e9es, l\u2019IA fait le reste. Ensemble, nous livrons plus vite, nous it\u00e9rons plus audacieusement, et je partage tout le processus avec le monde.",
+        'method.stat1': 'Prototypage rapide',
+        'method.stat2': 'D\u00e9veloppeur solo',
+        'method.stat3': 'Possibilit\u00e9s',
+        'method.step1.title': "Id\u00e9er avec l\u2019IA",
+        'method.step1.desc': "Brainstormer des concepts, valider des id\u00e9es et d\u00e9finir des fonctionnalit\u00e9s avec l\u2019IA conversationnelle.",
+        'method.step2.title': 'Designer & Prototyper',
+        'method.step2.desc': "G\u00e9n\u00e9rer des maquettes UI, it\u00e9rer sur les designs et construire des prototypes interactifs \u00e0 vitesse \u00e9clair.",
+        'method.step3.title': 'Construire & Livrer',
+        'method.step3.desc': "\u00c9crire du code de production avec l\u2019assistance de l\u2019IA, tester rigoureusement et d\u00e9ployer.",
+        'method.step4.title': 'Tout partager',
+        'method.step4.desc': "Documenter le parcours publiquement. Chaque victoire, chaque d\u00e9fi, chaque le\u00e7on apprise.",
+        'content.label': 'Build in Public',
+        'content.title': 'Tout le processus, document\u00e9.',
+        'content.subtitle': "Je documente tout. D\u00e9couvrez comment j\u2019ai cod\u00e9 Mogogo de A \u00e0 Z avec l\u2019IA.",
+        'content.card1.title': 'Vid\u00e9os compl\u00e8tes',
+        'content.card1.desc': "Des vid\u00e9os approfondies o\u00f9 je code des apps enti\u00e8res en live avec l\u2019IA. De z\u00e9ro au d\u00e9ploiement.",
+        'content.card2.title': 'Shorts & Reels',
+        'content.card2.desc': "Astuces rapides, tricks IA et coulisses en 60 secondes ou moins.",
+        'content.card3.title': 'Communaut\u00e9',
+        'content.card3.desc': "Rejoignez une communaut\u00e9 grandissante de d\u00e9vs indie et d\u2019enthousiastes de l\u2019IA. Ensemble, nous construisons le futur.",
+        'content.cta': "S\u2019abonner sur YouTube",
+        'contact.title': 'Connectons-nous.',
+        'contact.subtitle': "Une question, une id\u00e9e de collab, ou juste envie de dire bonjour\u00a0? \u00c9crivez-moi.",
+        'contact.email': 'Envoyer un email',
+        'footer.rights': 'Tous droits r\u00e9serv\u00e9s.',
+    },
+    es: {
+        'nav.projects': 'Proyectos',
+        'nav.method': 'M\u00e9todo',
+        'nav.content': 'Contenido',
+        'nav.contact': 'Contacto',
+        'hero.badge': 'Estudio de Software Indie',
+        'hero.title1': 'Construyendo el futuro',
+        'hero.title2': 'del software ',
+        'hero.title3': 'con IA.',
+        'hero.subtitle': 'Nurobix es mi estudio de desarrollo en solitario. Tras 20 a\u00f1os en tech, ahora empujo los l\u00edmites del c\u00f3digo asistido por IA. Creo apps, lanzo (muy) r\u00e1pido y comparto con ustedes todo lo que pasa entre bastidores.',
+        'hero.cta1': 'Ver mis proyectos',
+        'hero.cta2': 'Seguir la aventura',
+        'projects.label': 'Portafolio',
+        'projects.title': 'Proyectos',
+        'projects.subtitle': 'Apps que creo desde cero con metodolog\u00edas IA-first.',
+        'projects.mogogo.tag': 'Proyecto destacado',
+        'projects.mogogo.name': 'Salidas & Actividades',
+        'projects.mogogo.desc': 'Un or\u00e1culo impulsado por IA para encontrar tu pr\u00f3xima actividad local. D\u00edle tu estado de \u00e1nimo, tu onda, y d\u00e9jalo sorprenderte con el plan perfecto.',
+        'projects.mogogo.mockup': 'Vista previa de la app',
+        'projects.store.soon': 'Pr\u00f3ximamente',
+        'projects.next1.name': 'Pr\u00f3ximo proyecto',
+        'projects.next1.status': 'En desarrollo',
+        'projects.next1.desc': 'Algo nuevo se est\u00e1 cocinando. Mantente atento a mi pr\u00f3xima app IA.',
+        'projects.next2.name': 'Pr\u00f3ximamente',
+        'projects.next2.status': 'Fase de ideaci\u00f3n',
+        'projects.next2.desc': 'M\u00e1s ideas est\u00e1n gestando. Cada proyecto empuja los l\u00edmites de lo que puedo construir con IA.',
+        'method.label': 'Metodolog\u00eda',
+        'method.title': 'La IA es mi copiloto.',
+        'method.p1': 'No solo uso IA para escribir c\u00f3digo. La uso para pensar, dise\u00f1ar, prototipar y lanzar. Desde el primer wireframe hasta producci\u00f3n, la IA est\u00e1 integrada en cada paso de mi flujo de trabajo.',
+        'method.p2': '\u00bfEl resultado? Yo codifico las ideas, la IA hace el resto. Juntos, lanzamos m\u00e1s r\u00e1pido, iteramos con m\u00e1s audacia, y comparto todo el proceso con el mundo.',
+        'method.stat1': 'Prototipado r\u00e1pido',
+        'method.stat2': 'Desarrollador solo',
+        'method.stat3': 'Posibilidades',
+        'method.step1.title': 'Idear con IA',
+        'method.step1.desc': 'Hacer brainstorming de conceptos, validar ideas y definir funcionalidades usando IA conversacional.',
+        'method.step2.title': 'Dise\u00f1ar & Prototipar',
+        'method.step2.desc': 'Generar mockups de UI, iterar sobre dise\u00f1os y construir prototipos interactivos a velocidad rel\u00e1mpago.',
+        'method.step3.title': 'Construir & Lanzar',
+        'method.step3.desc': 'Escribir c\u00f3digo de producci\u00f3n con asistencia de IA, probar rigurosamente y desplegar al mundo.',
+        'method.step4.title': 'Compartir todo',
+        'method.step4.desc': 'Documentar el viaje p\u00fablicamente. Cada victoria, cada desaf\u00edo, cada lecci\u00f3n aprendida.',
+        'content.label': 'Build in Public',
+        'content.title': 'Todo el proceso, documentado.',
+        'content.subtitle': 'Lo documento todo. Mira c\u00f3mo construyo apps desde cero usando IA \u2014 sin atajos, sin secretos.',
+        'content.card1.title': 'Videos completos',
+        'content.card1.desc': 'Videos profundos donde programo apps completas en vivo con IA. De cero al despliegue.',
+        'content.card2.title': 'Shorts & Reels',
+        'content.card2.desc': 'Tips r\u00e1pidos, trucos de IA y momentos detr\u00e1s de c\u00e1maras en 60 segundos o menos.',
+        'content.card3.title': 'Comunidad',
+        'content.card3.desc': '\u00danete a una comunidad creciente de devs indie y entusiastas de la IA. Juntos, construimos el futuro.',
+        'content.cta': 'Suscribirse en YouTube',
+        'contact.title': 'Conectemos.',
+        'contact.subtitle': '\u00bfTienes una pregunta, una idea de colab, o simplemente quieres saludar? Escr\u00edbeme.',
+        'contact.email': 'Enviar un email',
+        'footer.rights': 'Todos los derechos reservados.',
+    }
+};
+
+let currentLang = 'en';
+
+function detectLanguage() {
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').substring(0, 2).toLowerCase();
+    if (translations[browserLang]) return browserLang;
+    return 'en';
+}
+
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+    // Update active lang button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    // Update page title per language
+    const titles = {
+        en: 'Nurobix — Building the future of software with AI',
+        fr: 'Nurobix — Construire le futur du logiciel avec l\'IA',
+        es: 'Nurobix — Construyendo el futuro del software con IA'
+    };
+    document.title = titles[lang] || titles.en;
+}
+
+
+// ---- Email obfuscation ----
+(function() {
+    const user = 'contact';
+    const domain = 'nurobix.io';
+    const link = document.getElementById('email-link');
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'mai' + 'lto:' + user + '@' + domain;
+    });
+})();
+
+
+// ---- Navbar scroll effect ----
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+
+// ---- Mobile menu ----
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+let menuOpen = false;
+
+function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+    document.body.style.overflow = '';
+}
+
+menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    menuIcon.setAttribute('d', menuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16');
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+
+
+// ---- Scroll reveal (fade-up) ----
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+
+// ---- Floating particles ----
+(function() {
+    const container = document.getElementById('particles');
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.opacity = Math.random() * 0.5 + 0.1;
+        p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+        p.style.animation = `float ${Math.random() * 20 + 15}s ease-in-out infinite`;
+        p.style.animationDelay = `-${Math.random() * 20}s`;
+        container.appendChild(p);
+    }
+
+    // Add float keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px); }
+            50% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px); }
+            75% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px); }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
+
+// ---- Smooth scroll for anchor links ----
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+
+// ---- Init ----
+setLang(detectLanguage());
+</script>
+
+</body>
+</html>
