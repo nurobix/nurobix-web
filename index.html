@@ -341,9 +341,7 @@
             <div class="flex flex-col md:flex-row md:items-center gap-8">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center text-2xl">
-                            🔥
-                        </div>
+                        <img src="mogogo-icon.png" alt="Mogogo" class="w-12 h-12 rounded-xl object-cover">
                         <div>
                             <h3 class="text-xl font-bold text-white">Mogogo</h3>
                             <span class="text-xs text-brand-400 font-mono" data-i18n="projects.mogogo.tag">Featured Project</span>
@@ -387,30 +385,28 @@
                     </div>
                 </div>
                 <!-- Mockup illustration -->
-                <div class="flex-shrink-0 w-full md:w-64 h-64 md:h-80 rounded-2xl bg-gradient-to-br from-orange-500/20 via-rose-500/10 to-purple-500/20 border border-white/5 flex items-center justify-center">
-                    <div class="text-center">
-                        <div class="text-6xl mb-3">🗺️</div>
-                        <span class="text-sm text-gray-500 font-mono" data-i18n="projects.mogogo.mockup">App preview</span>
-                    </div>
+                <div class="flex-shrink-0 w-full md:w-64 flex items-center justify-center">
+                    <img src="mogogo-preview.png" alt="Mogogo app preview" class="h-72 md:h-96 w-auto drop-shadow-2xl cursor-zoom-in hover:scale-105 transition-transform duration-300" onclick="openLightbox(this.src)">
                 </div>
             </div>
         </div>
 
         <!-- Other projects grid -->
         <div class="grid md:grid-cols-2 gap-6">
-            <!-- Placeholder project 1 -->
+            <!-- Bear Up -->
             <div class="glass-card rounded-2xl p-6 fade-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-lg">🧠</div>
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-lg">🐻</div>
                     <div>
-                        <h3 class="font-bold text-white" data-i18n="projects.next1.name">Next Project</h3>
-                        <span class="text-xs text-gray-500 font-mono" data-i18n="projects.next1.status">In development</span>
+                        <h3 class="font-bold text-white" data-i18n="projects.bearup.name">Bear Up</h3>
+                        <span class="text-xs text-gray-500 font-mono" data-i18n="projects.bearup.status">In development</span>
                     </div>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="projects.next1.desc">Something new is cooking. Stay tuned for my next AI-powered app.</p>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="projects.bearup.desc">An AI-powered conversational companion for panic attack support. Built from 20+ years of lived experience, available 24/7 when you need it most.</p>
                 <div class="mt-4 flex gap-2">
                     <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">AI</span>
-                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">SaaS</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Mental Health</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Mobile</span>
                 </div>
             </div>
 
@@ -644,9 +640,9 @@ const translations = {
         'projects.mogogo.desc': 'An AI-powered oracle to find your next local activity. Tell it your mood, your vibe, and let it surprise you with the perfect plan.',
         'projects.mogogo.mockup': 'App preview',
         'projects.store.soon': 'Coming soon',
-        'projects.next1.name': 'Next Project',
-        'projects.next1.status': 'In development',
-        'projects.next1.desc': 'Something new is cooking. Stay tuned for my next AI-powered app.',
+        'projects.bearup.name': 'Bear Up',
+        'projects.bearup.status': 'In development',
+        'projects.bearup.desc': 'An AI-powered conversational companion for panic attack support. Built from 20+ years of lived experience, available 24/7 when you need it most.',
         'projects.next2.name': 'Coming Soon',
         'projects.next2.status': 'Ideation phase',
         'projects.next2.desc': 'More ideas are brewing. Each project pushes the boundaries of what I can build with AI.',
@@ -700,9 +696,9 @@ const translations = {
         'projects.mogogo.desc': "Un oracle propuls\u00e9 par l\u2019IA pour trouver votre prochaine activit\u00e9 locale. Dites-lui votre humeur, votre vibe, et laissez-le vous surprendre avec le plan parfait.",
         'projects.mogogo.mockup': "Aper\u00e7u de l\u2019app",
         'projects.store.soon': 'Bient\u00f4t disponible',
-        'projects.next1.name': 'Prochain projet',
-        'projects.next1.status': 'En d\u00e9veloppement',
-        'projects.next1.desc': "Quelque chose mijote. Restez \u00e0 l\u2019\u00e9coute pour ma prochaine app IA.",
+        'projects.bearup.name': 'Bear Up',
+        'projects.bearup.status': 'En d\u00e9veloppement',
+        'projects.bearup.desc': "Un compagnon conversationnel propuls\u00e9 par l\u2019IA pour le soutien en cas d\u2019attaque de panique. N\u00e9 de 20+ ans d\u2019exp\u00e9rience v\u00e9cue, disponible 24h/24 quand vous en avez le plus besoin.",
         'projects.next2.name': 'Bient\u00f4t',
         'projects.next2.status': 'Phase d\u2019id\u00e9ation',
         'projects.next2.desc': "D\u2019autres id\u00e9es germent. Chaque projet repousse les limites de ce que je peux construire avec l\u2019IA.",
@@ -756,9 +752,9 @@ const translations = {
         'projects.mogogo.desc': 'Un or\u00e1culo impulsado por IA para encontrar tu pr\u00f3xima actividad local. D\u00edle tu estado de \u00e1nimo, tu onda, y d\u00e9jalo sorprenderte con el plan perfecto.',
         'projects.mogogo.mockup': 'Vista previa de la app',
         'projects.store.soon': 'Pr\u00f3ximamente',
-        'projects.next1.name': 'Pr\u00f3ximo proyecto',
-        'projects.next1.status': 'En desarrollo',
-        'projects.next1.desc': 'Algo nuevo se est\u00e1 cocinando. Mantente atento a mi pr\u00f3xima app IA.',
+        'projects.bearup.name': 'Bear Up',
+        'projects.bearup.status': 'En desarrollo',
+        'projects.bearup.desc': 'Un compa\u00f1ero conversacional impulsado por IA para apoyo durante ataques de p\u00e1nico. Nacido de 20+ a\u00f1os de experiencia vivida, disponible 24/7 cuando m\u00e1s lo necesitas.',
         'projects.next2.name': 'Pr\u00f3ximamente',
         'projects.next2.status': 'Fase de ideaci\u00f3n',
         'projects.next2.desc': 'M\u00e1s ideas est\u00e1n gestando. Cada proyecto empuja los l\u00edmites de lo que puedo construir con IA.',
@@ -904,6 +900,37 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         }
     `;
     document.head.appendChild(style);
+})();
+
+
+// ---- Lightbox ----
+(function() {
+    const overlay = document.createElement('div');
+    overlay.id = 'lightbox';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(5,5,16,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease';
+    overlay.innerHTML = '<img style="max-height:90vh;max-width:90vw;object-fit:contain;border-radius:16px;box-shadow:0 25px 80px -20px rgba(99,102,241,0.3);transform:scale(0.9);transition:transform 0.3s ease" />';
+    document.body.appendChild(overlay);
+    const img = overlay.querySelector('img');
+
+    overlay.addEventListener('click', function() {
+        img.style.transform = 'scale(0.9)';
+        overlay.style.opacity = '0';
+        setTimeout(function() { overlay.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') overlay.click();
+    });
+
+    window.openLightbox = function(src) {
+        img.src = src;
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function() {
+            overlay.style.opacity = '1';
+            img.style.transform = 'scale(1)';
+        });
+    };
 })();
 
 
