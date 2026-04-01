@@ -242,7 +242,6 @@
         <div class="hidden md:flex items-center gap-8">
             <a href="#projects" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
             <a href="#method" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.method">Method</a>
-            <a href="#content" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.content">Content</a>
             <a href="#contact" class="text-sm text-gray-400 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a>
             <!-- Language switcher -->
             <div class="flex items-center gap-1 ml-2 rounded-full glass px-1 py-1">
@@ -265,7 +264,6 @@
 <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 bg-[#050510]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
     <a href="#projects" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.projects">Projects</a>
     <a href="#method" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.method">Method</a>
-    <a href="#content" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.content">Content</a>
     <a href="#contact" onclick="closeMobileMenu()" class="text-2xl text-gray-300 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a>
     <div class="flex items-center gap-2 mt-4">
         <button onclick="setLang('en'); closeMobileMenu();" class="lang-btn text-sm px-3 py-2 rounded-full glass" data-lang="en">EN</button>
@@ -301,7 +299,7 @@
 
         <!-- Subtitle -->
         <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed fade-up" data-i18n="hero.subtitle">
-            Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps, I ship (very) fast, and I share the entire behind-the-scenes process with you.
+            Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps and I ship (very) fast.
         </p>
 
         <!-- CTAs -->
@@ -310,9 +308,9 @@
                 <span data-i18n="hero.cta1">See my projects</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </a>
-            <a href="https://www.youtube.com/@nurobix" target="_blank" rel="noopener" class="btn-secondary text-gray-300 font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#050510" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span data-i18n="hero.cta2">Follow the journey</span>
+            <a href="#contact" class="btn-secondary text-gray-300 font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span data-i18n="hero.cta2">Contact me</span>
             </a>
         </div>
 
@@ -392,7 +390,41 @@
         </div>
 
         <!-- Other projects grid -->
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Walton -->
+            <div class="glass-card rounded-2xl p-6 fade-up">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center text-lg">🎣</div>
+                    <div>
+                        <h3 class="font-bold text-white" data-i18n="projects.walton.name">Walton</h3>
+                        <span class="text-xs text-green-400 font-mono flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                            Live
+                        </span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="projects.walton.desc">The all-in-one app for French anglers. Weather, river flows, private spots, catch log — 100% free, offline-ready.</p>
+                <div class="mt-4 flex flex-wrap gap-2 mb-4">
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Mobile</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Offline</span>
+                    <span class="text-xs font-mono px-2 py-1 rounded-full glass text-gray-400">Fishing</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="https://apps.apple.com/fr/app/walton/id6761376787" target="_blank" rel="noopener" class="store-btn inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 hover:bg-white/10">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <span class="text-xs font-semibold text-white">App Store</span>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=io.nurobix.walton.android" target="_blank" rel="noopener" class="store-btn inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 hover:bg-white/10">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.17 12l2.528-2.492zM5.864 2.658L16.8 9.49l-2.302 2.302-8.634-8.634z"/></svg>
+                        <span class="text-xs font-semibold text-white">Google Play</span>
+                    </a>
+                    <a href="https://walton.nurobix.io" target="_blank" rel="noopener" class="store-btn inline-flex items-center gap-1.5 bg-teal-600/20 border border-teal-500/30 rounded-lg px-3 py-1.5 hover:bg-teal-600/30 text-teal-300">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                        <span class="text-xs font-semibold">Site web</span>
+                    </a>
+                </div>
+            </div>
+
             <!-- Bear Up -->
             <div class="glass-card rounded-2xl p-6 fade-up">
                 <div class="flex items-center gap-3 mb-4">
@@ -410,10 +442,10 @@
                 </div>
             </div>
 
-            <!-- Placeholder project 2 -->
+            <!-- Placeholder project -->
             <div class="glass-card rounded-2xl p-6 fade-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-lg">⚡</div>
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center text-lg">⚡</div>
                     <div>
                         <h3 class="font-bold text-white" data-i18n="projects.next2.name">Coming Soon</h3>
                         <span class="text-xs text-gray-500 font-mono" data-i18n="projects.next2.status">Ideation phase</span>
@@ -446,7 +478,7 @@
                     I don't just use AI to write code. I use it to think, design, prototype, and ship. From the first wireframe to production, AI is embedded in every step of my workflow.
                 </p>
                 <p class="text-gray-400 leading-relaxed mb-8" data-i18n="method.p2">
-                    The result? Solo-built apps that punch above their weight. Faster iterations, bolder ideas, and a transparent process shared with the world.
+                    The result? Solo-built apps that punch above their weight. Faster iterations and bolder ideas.
                 </p>
                 <div class="flex flex-wrap gap-6">
                     <div class="text-center">
@@ -491,71 +523,8 @@
                             <p class="text-xs text-gray-500" data-i18n="method.step3.desc">Write production code with AI assistance, test rigorously, and deploy to the world.</p>
                         </div>
                     </div>
-                    <!-- Step 4 -->
-                    <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-lg bg-brand-600/20 flex items-center justify-center text-brand-400 font-bold text-sm flex-shrink-0 mt-0.5">4</div>
-                        <div>
-                            <h4 class="font-semibold text-white text-sm" data-i18n="method.step4.title">Share Everything</h4>
-                            <p class="text-xs text-gray-500" data-i18n="method.step4.desc">Document the journey publicly. Every win, every challenge, every lesson learned.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<div class="section-divider max-w-4xl mx-auto"></div>
-
-
-<!-- ============================================ -->
-<!-- CONTENT / BUILD IN PUBLIC                    -->
-<!-- ============================================ -->
-<section id="content" class="relative py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-        <!-- Section header -->
-        <div class="text-center mb-16 fade-up">
-            <span class="text-xs font-mono text-brand-400 tracking-widest uppercase mb-3 block" data-i18n="content.label">Build in Public</span>
-            <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="content.title">The whole process, documented.</h2>
-            <p class="text-gray-400 max-w-lg mx-auto" data-i18n="content.subtitle">I document everything. Watch how I build apps from scratch using AI — no shortcuts, no secrets.</p>
-        </div>
-
-        <!-- Content grid -->
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-            <!-- Card 1: YouTube Long -->
-            <div class="glass-card rounded-2xl p-6 fade-up group">
-                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-red-500/20 to-red-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-red-500/30 transition-all">
-                    <svg class="w-12 h-12 text-red-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </div>
-                <h3 class="font-bold text-white mb-2" data-i18n="content.card1.title">Full Build Videos</h3>
-                <p class="text-sm text-gray-400" data-i18n="content.card1.desc">Deep-dive videos where I code entire apps live with AI. From zero to deployment.</p>
-            </div>
-
-            <!-- Card 2: Shorts -->
-            <div class="glass-card rounded-2xl p-6 fade-up group">
-                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-purple-500/30 transition-all">
-                    <svg class="w-12 h-12 text-purple-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-                <h3 class="font-bold text-white mb-2" data-i18n="content.card2.title">Shorts & Reels</h3>
-                <p class="text-sm text-gray-400" data-i18n="content.card2.desc">Quick tips, AI tricks, and behind-the-scenes moments in 60 seconds or less.</p>
-            </div>
-
-            <!-- Card 3: Community -->
-            <div class="glass-card rounded-2xl p-6 fade-up group">
-                <div class="w-full aspect-video rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-800/10 border border-white/5 flex items-center justify-center mb-5 group-hover:from-blue-500/30 transition-all">
-                    <svg class="w-12 h-12 text-blue-400 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                </div>
-                <h3 class="font-bold text-white mb-2" data-i18n="content.card3.title">Community</h3>
-                <p class="text-sm text-gray-400" data-i18n="content.card3.desc">Join a growing community of indie devs and AI enthusiasts building the future together.</p>
-            </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="text-center fade-up">
-            <a href="https://www.youtube.com/@nurobix" target="_blank" rel="noopener" class="btn-primary text-white font-semibold px-8 py-3.5 rounded-xl text-sm inline-flex items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#050510" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span data-i18n="content.cta">Subscribe on YouTube</span>
-            </a>
         </div>
     </div>
 </section>
@@ -623,15 +592,14 @@ const translations = {
     en: {
         'nav.projects': 'Projects',
         'nav.method': 'Method',
-        'nav.content': 'Content',
         'nav.contact': 'Contact',
         'hero.badge': 'Indie Software Studio',
         'hero.title1': 'Building the future',
         'hero.title2': 'of software ',
         'hero.title3': 'with AI.',
-        'hero.subtitle': 'Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps, I ship (very) fast, and I share the entire behind-the-scenes process with you.',
+        'hero.subtitle': 'Nurobix is my solo dev studio. After 20 years in tech, I now push the limits of AI-assisted coding. I build apps and I ship (very) fast.',
         'hero.cta1': 'See my projects',
-        'hero.cta2': 'Follow the journey',
+        'hero.cta2': 'Contact me',
         'projects.label': 'Portfolio',
         'projects.title': 'Projects',
         'projects.subtitle': 'Apps I build from scratch using AI-first methodologies.',
@@ -644,13 +612,15 @@ const translations = {
         'projects.bearup.name': 'Bear Up',
         'projects.bearup.status': 'In development',
         'projects.bearup.desc': 'An AI-powered conversational companion for panic attack support. Built from 20+ years of lived experience, available 24/7 when you need it most.',
+        'projects.walton.name': 'Walton',
+        'projects.walton.desc': 'The all-in-one app for French anglers. Weather, river flows, private spots, catch log — 100% free, offline-ready.',
         'projects.next2.name': 'Coming Soon',
         'projects.next2.status': 'Ideation phase',
         'projects.next2.desc': 'More ideas are brewing. Each project pushes the boundaries of what I can build with AI.',
         'method.label': 'Methodology',
         'method.title': 'AI is my co-pilot.',
         'method.p1': "I don't just use AI to write code. I use it to think, design, prototype, and ship. From the first wireframe to production, AI is embedded in every step of my workflow.",
-        'method.p2': 'The result? I code the ideas, AI does the heavy lifting. Together, we ship faster, iterate bolder, and share the entire process with the world.',
+        'method.p2': 'The result? I code the ideas, AI does the heavy lifting. Together, we ship faster and iterate bolder.',
         'method.stat1': 'Faster prototyping',
         'method.stat2': 'Solo developer',
         'method.stat3': 'Possibilities',
@@ -660,18 +630,6 @@ const translations = {
         'method.step2.desc': 'Generate UI mockups, iterate on designs, and build interactive prototypes at lightning speed.',
         'method.step3.title': 'Build & Ship',
         'method.step3.desc': 'Write production code with AI assistance, test rigorously, and deploy to the world.',
-        'method.step4.title': 'Share Everything',
-        'method.step4.desc': 'Document the journey publicly. Every win, every challenge, every lesson learned.',
-        'content.label': 'Build in Public',
-        'content.title': 'The whole process, documented.',
-        'content.subtitle': 'I document everything. Watch how I build apps from scratch using AI — no shortcuts, no secrets.',
-        'content.card1.title': 'Full Build Videos',
-        'content.card1.desc': 'Deep-dive videos where I code entire apps live with AI. From zero to deployment.',
-        'content.card2.title': 'Shorts & Reels',
-        'content.card2.desc': 'Quick tips, AI tricks, and behind-the-scenes moments in 60 seconds or less.',
-        'content.card3.title': 'Community',
-        'content.card3.desc': 'Join a growing community of indie devs and AI enthusiasts. Together, we build the future.',
-        'content.cta': 'Subscribe on YouTube',
         'contact.title': "Let's connect.",
         'contact.subtitle': 'Got a question, a collab idea, or just want to say hi? Reach out anytime.',
         'contact.email': 'Send me an email',
@@ -680,15 +638,14 @@ const translations = {
     fr: {
         'nav.projects': 'Projets',
         'nav.method': 'M\u00e9thode',
-        'nav.content': 'Contenu',
         'nav.contact': 'Contact',
         'hero.badge': 'Studio Logiciel Indie',
         'hero.title1': "Construire le futur",
         'hero.title2': 'du logiciel ',
         'hero.title3': 'avec l\u2019IA.',
-        'hero.subtitle': "Nurobix est mon studio de d\u00e9veloppement solo. Apr\u00e8s 20 ans dans la tech, je repousse aujourd\u2019hui les limites du code assist\u00e9 par l\u2019IA. Je cr\u00e9e des apps, je livre (tr\u00e8s) vite, et je partage avec vous toutes les coulisses du processus.",
+        'hero.subtitle': "Nurobix est mon studio de d\u00e9veloppement solo. Apr\u00e8s 20 ans dans la tech, je repousse aujourd\u2019hui les limites du code assist\u00e9 par l\u2019IA. Je cr\u00e9e des apps et je livre (tr\u00e8s) vite.",
         'hero.cta1': 'Voir mes projets',
-        'hero.cta2': "Suivre l\u2019aventure",
+        'hero.cta2': 'Contactez-moi',
         'projects.label': 'Portfolio',
         'projects.title': 'Projets',
         'projects.subtitle': "Des apps que je cr\u00e9e de z\u00e9ro avec une approche IA-first.",
@@ -701,13 +658,15 @@ const translations = {
         'projects.bearup.name': 'Bear Up',
         'projects.bearup.status': 'En d\u00e9veloppement',
         'projects.bearup.desc': "Un compagnon conversationnel propuls\u00e9 par l\u2019IA pour le soutien en cas d\u2019attaque de panique. N\u00e9 de 20+ ans d\u2019exp\u00e9rience v\u00e9cue, disponible 24h/24 quand vous en avez le plus besoin.",
+        'projects.walton.name': 'Walton',
+        'projects.walton.desc': "L\u2019app tout-en-un des p\u00eacheurs fran\u00e7ais. M\u00e9t\u00e9o, d\u00e9bits, spots priv\u00e9s, carnet de touches \u2014 100% gratuit, fonctionne hors-ligne.",
         'projects.next2.name': 'Bient\u00f4t',
         'projects.next2.status': 'Phase d\u2019id\u00e9ation',
         'projects.next2.desc': "D\u2019autres id\u00e9es germent. Chaque projet repousse les limites de ce que je peux construire avec l\u2019IA.",
         'method.label': 'M\u00e9thodologie',
         'method.title': "L\u2019IA est mon copilote.",
         'method.p1': "Je n\u2019utilise pas juste l\u2019IA pour \u00e9crire du code. Je l\u2019utilise pour r\u00e9fl\u00e9chir, designer, prototyper et livrer. Du premier wireframe \u00e0 la prod, l\u2019IA est int\u00e9gr\u00e9e \u00e0 chaque \u00e9tape de mon workflow.",
-        'method.p2': "Le r\u00e9sultat\u00a0? Je code les id\u00e9es, l\u2019IA fait le reste. Ensemble, nous livrons plus vite, nous it\u00e9rons plus audacieusement, et je partage tout le processus avec le monde.",
+        'method.p2': "Le r\u00e9sultat\u00a0? Je code les id\u00e9es, l\u2019IA fait le reste. Ensemble, nous livrons plus vite et nous it\u00e9rons plus audacieusement.",
         'method.stat1': 'Prototypage rapide',
         'method.stat2': 'D\u00e9veloppeur solo',
         'method.stat3': 'Possibilit\u00e9s',
@@ -717,18 +676,6 @@ const translations = {
         'method.step2.desc': "G\u00e9n\u00e9rer des maquettes UI, it\u00e9rer sur les designs et construire des prototypes interactifs \u00e0 vitesse \u00e9clair.",
         'method.step3.title': 'Construire & Livrer',
         'method.step3.desc': "\u00c9crire du code de production avec l\u2019assistance de l\u2019IA, tester rigoureusement et d\u00e9ployer.",
-        'method.step4.title': 'Tout partager',
-        'method.step4.desc': "Documenter le parcours publiquement. Chaque victoire, chaque d\u00e9fi, chaque le\u00e7on apprise.",
-        'content.label': 'Build in Public',
-        'content.title': 'Tout le processus, document\u00e9.',
-        'content.subtitle': "Je documente tout. D\u00e9couvrez comment j\u2019ai cod\u00e9 Mogogo de A \u00e0 Z avec l\u2019IA.",
-        'content.card1.title': 'Vid\u00e9os compl\u00e8tes',
-        'content.card1.desc': "Des vid\u00e9os approfondies o\u00f9 je code des apps enti\u00e8res en live avec l\u2019IA. De z\u00e9ro au d\u00e9ploiement.",
-        'content.card2.title': 'Shorts & Reels',
-        'content.card2.desc': "Astuces rapides, tricks IA et coulisses en 60 secondes ou moins.",
-        'content.card3.title': 'Communaut\u00e9',
-        'content.card3.desc': "Rejoignez une communaut\u00e9 grandissante de d\u00e9vs indie et d\u2019enthousiastes de l\u2019IA. Ensemble, nous construisons le futur.",
-        'content.cta': "S\u2019abonner sur YouTube",
         'contact.title': 'Connectons-nous.',
         'contact.subtitle': "Une question, une id\u00e9e de collab, ou juste envie de dire bonjour\u00a0? \u00c9crivez-moi.",
         'contact.email': 'Envoyer un email',
@@ -737,15 +684,14 @@ const translations = {
     es: {
         'nav.projects': 'Proyectos',
         'nav.method': 'M\u00e9todo',
-        'nav.content': 'Contenido',
         'nav.contact': 'Contacto',
         'hero.badge': 'Estudio de Software Indie',
         'hero.title1': 'Construyendo el futuro',
         'hero.title2': 'del software ',
         'hero.title3': 'con IA.',
-        'hero.subtitle': 'Nurobix es mi estudio de desarrollo en solitario. Tras 20 a\u00f1os en tech, ahora empujo los l\u00edmites del c\u00f3digo asistido por IA. Creo apps, lanzo (muy) r\u00e1pido y comparto con ustedes todo lo que pasa entre bastidores.',
+        'hero.subtitle': 'Nurobix es mi estudio de desarrollo en solitario. Tras 20 a\u00f1os en tech, ahora empujo los l\u00edmites del c\u00f3digo asistido por IA. Creo apps y lanzo (muy) r\u00e1pido.',
         'hero.cta1': 'Ver mis proyectos',
-        'hero.cta2': 'Seguir la aventura',
+        'hero.cta2': 'Cont\u00e1ctame',
         'projects.label': 'Portafolio',
         'projects.title': 'Proyectos',
         'projects.subtitle': 'Apps que creo desde cero con metodolog\u00edas IA-first.',
@@ -758,13 +704,15 @@ const translations = {
         'projects.bearup.name': 'Bear Up',
         'projects.bearup.status': 'En desarrollo',
         'projects.bearup.desc': 'Un compa\u00f1ero conversacional impulsado por IA para apoyo durante ataques de p\u00e1nico. Nacido de 20+ a\u00f1os de experiencia vivida, disponible 24/7 cuando m\u00e1s lo necesitas.',
+        'projects.walton.name': 'Walton',
+        'projects.walton.desc': 'La app todo-en-uno para pescadores franceses. Clima, caudales, spots privados, registro de capturas \u2014 100% gratis, funciona sin conexi\u00f3n.',
         'projects.next2.name': 'Pr\u00f3ximamente',
         'projects.next2.status': 'Fase de ideaci\u00f3n',
         'projects.next2.desc': 'M\u00e1s ideas est\u00e1n gestando. Cada proyecto empuja los l\u00edmites de lo que puedo construir con IA.',
         'method.label': 'Metodolog\u00eda',
         'method.title': 'La IA es mi copiloto.',
         'method.p1': 'No solo uso IA para escribir c\u00f3digo. La uso para pensar, dise\u00f1ar, prototipar y lanzar. Desde el primer wireframe hasta producci\u00f3n, la IA est\u00e1 integrada en cada paso de mi flujo de trabajo.',
-        'method.p2': '\u00bfEl resultado? Yo codifico las ideas, la IA hace el resto. Juntos, lanzamos m\u00e1s r\u00e1pido, iteramos con m\u00e1s audacia, y comparto todo el proceso con el mundo.',
+        'method.p2': '\u00bfEl resultado? Yo codifico las ideas, la IA hace el resto. Juntos, lanzamos m\u00e1s r\u00e1pido e iteramos con m\u00e1s audacia.',
         'method.stat1': 'Prototipado r\u00e1pido',
         'method.stat2': 'Desarrollador solo',
         'method.stat3': 'Posibilidades',
@@ -774,18 +722,6 @@ const translations = {
         'method.step2.desc': 'Generar mockups de UI, iterar sobre dise\u00f1os y construir prototipos interactivos a velocidad rel\u00e1mpago.',
         'method.step3.title': 'Construir & Lanzar',
         'method.step3.desc': 'Escribir c\u00f3digo de producci\u00f3n con asistencia de IA, probar rigurosamente y desplegar al mundo.',
-        'method.step4.title': 'Compartir todo',
-        'method.step4.desc': 'Documentar el viaje p\u00fablicamente. Cada victoria, cada desaf\u00edo, cada lecci\u00f3n aprendida.',
-        'content.label': 'Build in Public',
-        'content.title': 'Todo el proceso, documentado.',
-        'content.subtitle': 'Lo documento todo. Mira c\u00f3mo construyo apps desde cero usando IA \u2014 sin atajos, sin secretos.',
-        'content.card1.title': 'Videos completos',
-        'content.card1.desc': 'Videos profundos donde programo apps completas en vivo con IA. De cero al despliegue.',
-        'content.card2.title': 'Shorts & Reels',
-        'content.card2.desc': 'Tips r\u00e1pidos, trucos de IA y momentos detr\u00e1s de c\u00e1maras en 60 segundos o menos.',
-        'content.card3.title': 'Comunidad',
-        'content.card3.desc': '\u00danete a una comunidad creciente de devs indie y entusiastas de la IA. Juntos, construimos el futuro.',
-        'content.cta': 'Suscribirse en YouTube',
         'contact.title': 'Conectemos.',
         'contact.subtitle': '\u00bfTienes una pregunta, una idea de colab, o simplemente quieres saludar? Escr\u00edbeme.',
         'contact.email': 'Enviar un email',
